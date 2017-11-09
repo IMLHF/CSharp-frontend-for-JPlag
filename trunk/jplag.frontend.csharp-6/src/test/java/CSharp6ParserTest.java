@@ -55,17 +55,40 @@ public class CSharp6ParserTest {
                 + "USING     \n"
                 + "NAMESPACE \n"
                 + "CLASS{    \n"
-                + "MEMBERS{  \n"
                 + "METHOD{   \n"
                 + "VAR_CONST \n"
                 + "TERNARY   \n"
-                + "METHOD{   \n"
-                + "}MEMBERS  \n"
+                + "}METHOD   \n"
                 + "}CLASS    \n"
                 + "********\n";
         String tokens = parseWithCSharp6Parser(file, false);
 //        System.out.println(tokens);
         assertEquals(expected, tokens);
+    }
+    
+    @Test
+    public void testMasterProgram() {
+        File file = new File(srcTestResources, "MasterProgram.cs");
+        String tokens = parseWithCSharp6Parser(file, true);
+        System.out.println(tokens);
+//        String expected = ""
+//                + "USING     \n"
+//                + "USING     \n"
+//                + "USING     \n"
+//                + "USING     \n"
+//                + "USING     \n"
+//                + "NAMESPACE \n"
+//                + "CLASS{    \n"
+//                + "MEMBERS{  \n"
+//                + "METHOD{   \n"
+//                + "VAR_CONST \n"
+//                + "TERNARY   \n"
+//                + "METHOD{   \n"
+//                + "}MEMBERS  \n"
+//                + "}CLASS    \n"
+//                + "********\n";
+//        assertEquals(expected, tokens);
+        assertTrue(true);
     }
 
     @Test

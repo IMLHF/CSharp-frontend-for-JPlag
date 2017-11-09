@@ -2337,7 +2337,7 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void exitMethod_declaration(CSharpParser.Method_declarationContext ctx) {
-        jplagParser.add(METHOD_DECLARATION_BEGIN, ctx.getStop());
+        jplagParser.add(METHOD_DECLARATION_END, ctx.getStop());
     }
 
     @Override
@@ -2427,7 +2427,7 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void exitElseStatement(CSharpParser.ElseStatementContext ctx) {
-        jplagParser.add(ELSE_BEGIN, ctx.getStop());
+        jplagParser.add(ELSE_END, ctx.getStop());
     }   
 
     @Override
