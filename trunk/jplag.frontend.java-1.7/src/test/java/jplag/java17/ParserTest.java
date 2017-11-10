@@ -228,6 +228,11 @@ public class ParserTest {
 	public void assureBackwardsCompatibility4() throws IOException {
 		compareWithParser15(new File(srcTestResources, "Kalender.java"));
 	}
+        
+        @Test
+	public void assureBackwardsCompatibility5() throws IOException {
+		compareWithParser15(new File(srcTestResources, "IfElsifElse.java"));
+	}
 
 	/**
 	 * Compare results (token sequence) with Java 1.5 parser (without method

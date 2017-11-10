@@ -373,7 +373,7 @@ simple_embedded_statement
 	| expression ';'                                              #expressionStatement
 
 	// selection statements
-	| IF OPEN_PARENS expression CLOSE_PARENS if_body (elseStatement)?               #ifStatement
+	| if_wrapper (elseStatement)?                                 #ifElseStatement
     | SWITCH OPEN_PARENS expression CLOSE_PARENS OPEN_BRACE switch_section* CLOSE_BRACE           #switchStatement
 
     // iteration statements
@@ -400,6 +400,11 @@ simple_embedded_statement
 	| UNSAFE block                                                                       #unsafeStatement
 	| FIXED OPEN_PARENS pointer_type fixed_pointer_declarators CLOSE_PARENS embedded_statement            #fixedStatement
 	;
+
+if_wrapper
+    : IF OPEN_PARENS expression CLOSE_PARENS if_body                  #ifStatement
+    ;
+
 
 block
 	: OPEN_BRACE statement_list? CLOSE_BRACE

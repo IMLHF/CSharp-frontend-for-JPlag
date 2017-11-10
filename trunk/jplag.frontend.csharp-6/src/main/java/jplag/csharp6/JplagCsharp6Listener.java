@@ -2446,4 +2446,14 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
     @Override
     public void exitTernaryExpression(CSharpParser.TernaryExpressionContext ctx) {
     }
+
+    @Override
+    public void enterIfElseStatement(CSharpParser.IfElseStatementContext ctx) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void exitIfElseStatement(CSharpParser.IfElseStatementContext ctx) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

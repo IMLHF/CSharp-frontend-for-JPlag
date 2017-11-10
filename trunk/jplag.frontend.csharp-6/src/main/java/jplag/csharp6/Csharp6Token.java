@@ -66,10 +66,10 @@ public class Csharp6Token extends jplag.Token implements Csharp6TokenConstants {
                 return "DO_WHILE{ ";                        //
             case DO_WHILE_END:                              // J_DO_END
                 return "}DO_WHILE ";                        //
-//            case WHILE_BEGIN:                               // J_WHILE_BEGIN
-//                return "WHILE{    ";                        //
-//            case WHILE_END:                                 // J_WHILE_END
-//                return "}WHILE    ";                        //
+            case WHILE_BEGIN:                               // J_WHILE_BEGIN
+                return "WHILE{    ";                        //
+            case WHILE_END:                                 // J_WHILE_END
+                return "}WHILE    ";                        //
             case FOR_BEGIN:                                 // J_FOR_BEGIN
                 return "FOR{      ";                        //
             case FOR_END:                                   // J_FOR_END
@@ -90,8 +90,8 @@ public class Csharp6Token extends jplag.Token implements Csharp6TokenConstants {
                 return "}TRY      ";                        //
             case GENERAL_AND_SPECIFIC_CATCH_BEGIN:          // J_CATCH_BEGIN
                 return "CATCH{    ";                        //
-//            case GENERAL_AND_SPECIFIC_CATCH_END:            // J_CATCH_END
-//                return "}CATCH    ";                        //
+            case GENERAL_AND_SPECIFIC_CATCH_END:            // J_CATCH_END
+                return "}CATCH    ";                        //
             case FINALLY_BEGIN:                             // J_FINALLY
                 return "FINALLY{  ";                        //
             case FINALLY_END:                               // ***addded***
@@ -104,7 +104,7 @@ public class Csharp6Token extends jplag.Token implements Csharp6TokenConstants {
                 return "ELSE{     ";                        //
             case ELSE_END:                                  // ***added***
                 return "}ELSE     ";                        //
-            case TERNARY_EXPRESSION:                    // J_COND
+            case TERNARY_EXPRESSION:                        // J_COND
                 return "TERNARY   ";                        //
             case BREAK:                                     // J_BREAK
                 return "BREAK     ";                        //
