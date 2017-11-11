@@ -27,6 +27,7 @@ public class CSharp6ParserTest {
     public CSharp6ParserTest() {
     }
 
+    // <editor-fold defaultstate="collapsed" desc="unit test setUp/tearDown">
     @BeforeClass
     public static void setUpClass() {
         srcTestResources = new File(System.getProperty("user.dir"), "src/test/resources");
@@ -44,6 +45,8 @@ public class CSharp6ParserTest {
     public void tearDown() {
     }
 
+    // </editor-fold>
+    // simple and master are for debugging purposes only (should probably include program.cs...
     @Test
     public void testSimpleProgram() {
         File file = new File(srcTestResources, "SimpleProgram.cs");
@@ -65,7 +68,7 @@ public class CSharp6ParserTest {
 //        System.out.println(tokens);
         assertEquals(expected, tokens);
     }
-    
+
     @Test
     public void testMasterProgram() {
         File file = new File(srcTestResources, "MasterProgram.cs");
@@ -92,8 +95,19 @@ public class CSharp6ParserTest {
     }
 
     @Test
-    public void testSimpleClass() {
-        File file = new File(srcTestResources, "SimpleClass.cs");
+    public void testTemplate() {
+        File file = new File(srcTestResources, "fileName.cs");
+        String expected = "";
+        String tokens = parseWithCSharp6Parser(file, true);
+        System.out.println(tokens);
+        assertTrue(true);
+//        assertEquals(expected, tokens);
+    }
+
+    // real unit tests begin here
+    @Test
+    public void testNamespace() {
+        File file = new File(srcTestResources, "Namespace.cs");
         String expected = ""
                 + "USING     \n"
                 + "USING     \n"
@@ -102,18 +116,67 @@ public class CSharp6ParserTest {
                 + "USING     \n"
                 + "NAMESPACE \n"
                 + "CLASS{    \n"
-                + "CONSTRUCT{\n"
-                + "}CONSTRUCT\n"
-                + "CONSTRUCT{\n"
-                + "}CONSTRUCT\n"
-                + "CONSTRUCT{\n"
-                + "}CONSTRUCT\n"
+                + "METHOD{   \n"
+                + "}METHOD   \n"
+                + "}CLASS    \n"
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "METHOD{   \n"
+                + "}METHOD   \n"
+                + "}CLASS    \n"
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "METHOD{   \n"
+                + "}METHOD   \n"
                 + "}CLASS    \n"
                 + "********\n";
         String tokens = parseWithCSharp6Parser(file, false);
         assertEquals(expected, tokens);
     }
 
+    @Test
+    public void testUsingDirective() {
+        File file = new File(srcTestResources, "UsingDirective.cs");
+        String expected = ""
+                + "USING     \n"
+                + "USING     \n"
+                + "USING     \n"
+                + "USING     \n"
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "VAR_CONST \n"
+                + "VAR_CONST \n"
+                + "VAR_CONST \n"
+                + "METHOD{   \n"
+                + "}METHOD   \n"
+                + "}CLASS    \n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
+    @Test
+    public void testClass() {
+        File file = new File(srcTestResources, "Class.cs");
+        String expected = ""
+                + "CLASS{    \n"
+                + "CLASS{    \n"
+                + "}CLASS    \n"
+                + "CLASS{    \n"
+                + "}CLASS    \n"
+                + "}CLASS    \n"
+                + "CLASS{    \n"
+                + "CLASS{    \n"
+                + "CLASS{    \n"
+                + "}CLASS    \n"
+                + "}CLASS    \n"
+                + "}CLASS    \n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="private helper functions">
     private String parseWithCSharp6Parser(File csharpFile, boolean withDetails) {
         Parser p = new Parser();
         p.setProgram(new StrippedProgram());
@@ -134,9 +197,9 @@ public class CSharp6ParserTest {
             }
             sb.append("\n");
         }
-
         String oldTokens = sb.toString();
         return oldTokens;
     }
+    // </editor-fold>
 
 }
