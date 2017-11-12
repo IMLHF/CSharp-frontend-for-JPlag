@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
@@ -58,6 +59,7 @@ public class CSharp6ParserTest {
                 + "USING     \n"
                 + "NAMESPACE \n"
                 + "CLASS{    \n"
+                + "VOID      \n"
                 + "METHOD{   \n"
                 + "VAR_CONST \n"
                 + "TERNARY   \n"
@@ -65,36 +67,40 @@ public class CSharp6ParserTest {
                 + "}CLASS    \n"
                 + "********\n";
         String tokens = parseWithCSharp6Parser(file, false);
-//        System.out.println(tokens);
         assertEquals(expected, tokens);
     }
 
+    /**
+     * work in progress
+     */
     @Test
+    @Ignore
     public void testMasterProgram() {
         File file = new File(srcTestResources, "MasterProgram.cs");
         String tokens = parseWithCSharp6Parser(file, true);
         System.out.println(tokens);
-//        String expected = ""
-//                + "USING     \n"
-//                + "USING     \n"
-//                + "USING     \n"
-//                + "USING     \n"
-//                + "USING     \n"
-//                + "NAMESPACE \n"
-//                + "CLASS{    \n"
-//                + "MEMBERS{  \n"
-//                + "METHOD{   \n"
-//                + "VAR_CONST \n"
-//                + "TERNARY   \n"
-//                + "METHOD{   \n"
-//                + "}MEMBERS  \n"
-//                + "}CLASS    \n"
-//                + "********\n";
-//        assertEquals(expected, tokens);
+        String expected = ""
+                + "USING     \n"
+                + "USING     \n"
+                + "USING     \n"
+                + "USING     \n"
+                + "USING     \n"
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "MEMBERS{  \n"
+                + "METHOD{   \n"
+                + "VAR_CONST \n"
+                + "TERNARY   \n"
+                + "METHOD{   \n"
+                + "}MEMBERS  \n"
+                + "}CLASS    \n"
+                + "********\n";
+        assertEquals(expected, tokens);
         assertTrue(true);
     }
 
     @Test
+    @Ignore
     public void testTemplate() {
         File file = new File(srcTestResources, "fileName.cs");
         String expected = "";
@@ -116,16 +122,19 @@ public class CSharp6ParserTest {
                 + "USING     \n"
                 + "NAMESPACE \n"
                 + "CLASS{    \n"
+                + "VOID      \n"
                 + "METHOD{   \n"
                 + "}METHOD   \n"
                 + "}CLASS    \n"
                 + "NAMESPACE \n"
                 + "CLASS{    \n"
+                + "VOID      \n"
                 + "METHOD{   \n"
                 + "}METHOD   \n"
                 + "}CLASS    \n"
                 + "NAMESPACE \n"
                 + "CLASS{    \n"
+                + "VOID      \n"
                 + "METHOD{   \n"
                 + "}METHOD   \n"
                 + "}CLASS    \n"
@@ -147,6 +156,7 @@ public class CSharp6ParserTest {
                 + "VAR_CONST \n"
                 + "VAR_CONST \n"
                 + "VAR_CONST \n"
+                + "VOID      \n"
                 + "METHOD{   \n"
                 + "}METHOD   \n"
                 + "}CLASS    \n"
@@ -170,6 +180,28 @@ public class CSharp6ParserTest {
                 + "CLASS{    \n"
                 + "}CLASS    \n"
                 + "}CLASS    \n"
+                + "}CLASS    \n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
+    @Test
+    public void testMethod() {
+        File file = new File(srcTestResources, "Method.cs");
+        String expected = ""
+                + "USING     \n"
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "VOID      \n"
+                + "METHOD{   \n"
+                + "}METHOD   \n"
+                + "VOID      \n"
+                + "METHOD{   \n"
+                + "}METHOD   \n"
+                + "METHOD{   \n"
+                + "RETURN    \n"
+                + "}METHOD   \n"
                 + "}CLASS    \n"
                 + "********\n";
         String tokens = parseWithCSharp6Parser(file, false);

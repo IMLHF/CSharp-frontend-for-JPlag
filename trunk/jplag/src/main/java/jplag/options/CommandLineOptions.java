@@ -333,39 +333,18 @@ public class CommandLineOptions extends Options {
         return i;
     }
     
-//    public void log(Object o){
-//        System.out.println(o.toString());
-//    }
-//    
-//    public void log(Object[] sArr){
-//        for (Object s : sArr){
-//            System.out.print(s.toString()+", ");
-//        }
-//        System.out.println();
-//    }
-    
 	public void initializeSecondStep(Program program) throws jplag.ExitException {
 
-//            log(languages);
-//            log(languageName);
 		for (int j = 0; j < languages.length - 1; j += 2)
 			if (languageName.equals(languages[j]))
 				try {
-//                                    log("entering try catch");
-//                                    log(languages[j + 1]);
-//                                    log(Class.forName(languages[j + 1]));
-//                                    log(Class.forName(languages[j + 1]).getDeclaredConstructors());
 					Constructor<?>[] languageConstructors = Class.forName(languages[j + 1]).getDeclaredConstructors();
-//                                        log(languageConstructors);
 					Constructor<?> cons = languageConstructors[0];
-//                                        log(cons);
 					Object[] ob = { program };
-//                                        log(ob);
 					// All Language have to have a program as Constructor
 					// Parameter
 					// ->public Language(ProgramI prog)
 					Language tmp = (Language) cons.newInstance(ob);
-//                                        log(tmp);
 					this.language = tmp;
 					System.out.println("Language accepted: " + tmp.name() + "\nCommand line: " + this.commandLine);
 					found1 = true;

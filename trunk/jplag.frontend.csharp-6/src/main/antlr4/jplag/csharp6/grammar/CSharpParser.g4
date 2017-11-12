@@ -622,7 +622,7 @@ common_member_declaration
 	| event_declaration
 	| conversion_operator_declarator (body | right_arrow expression ';') // C# 6
 	| constructor_declaration
-	| VOID method_declaration   
+	| method_declaration   
 	| class_definition
 	| struct_definition
 	| interface_definition
@@ -1112,7 +1112,7 @@ constructor_declaration
 	;
 
 method_declaration // lamdas from C# 6
-	: method_member_name type_parameter_list? OPEN_PARENS formal_parameter_list? CLOSE_PARENS
+	: VOID? method_member_name type_parameter_list? OPEN_PARENS formal_parameter_list? CLOSE_PARENS
 	    type_parameter_constraints_clauses? (method_body | right_arrow expression ';')
 	;
 

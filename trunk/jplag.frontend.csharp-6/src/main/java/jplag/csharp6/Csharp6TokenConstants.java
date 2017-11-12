@@ -9,8 +9,8 @@ public interface Csharp6TokenConstants extends jplag.TokenConstants {
     final static int USING_DIRECTIVE =                  3;  // J_IMPORT         // UNIT TESTED  // GRAMMAR VERIFIED
     final static int CLASS_DEFINITION_BEGIN =           4;  // J_CLASS_BEGIN    // UNIT TESTED  // GRAMMAR VERIFIED --> this only matches a subset of class-declaration defined here https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes#class-declarations
     final static int CLASS_DEFINITION_END =             5;  // J_CLASS_END      // ""           // ""
-    final static int METHOD_DECLARATION_BEGIN =         6;  // J_METHOD_BEGIN
-    final static int METHOD_DECLARATION_END =           7;  // J_METHOD_END
+    final static int METHOD_DECLARATION_BEGIN =         6;  // J_METHOD_BEGIN   // UNIT TESTED  // GRAMMAR VERIFIED --> this only matches a subset of class-declaration defined here https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes#methods
+    final static int METHOD_DECLARATION_END =           7;  // J_METHOD_END     // ""           // ""
     final static int VARIABLE_AND_CONSTANT_DECLARATOR = 8;  // J_VARDEF
                                                             // J_SYNC_BEGIN
                                                             // J_SYNC_END

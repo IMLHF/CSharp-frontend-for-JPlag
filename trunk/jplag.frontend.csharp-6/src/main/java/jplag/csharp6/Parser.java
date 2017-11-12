@@ -82,36 +82,25 @@ public class Parser extends jplag.Parser implements Csharp6TokenConstants {
     }
 
     private boolean parseFile(File dir, String file) {
-//        BufferedInputStream fis;
-        BOMInputStream b;
-
-//        ANTLRInputStream input;
+        BOMInputStream bomInputStream;
         CharStream input;
         try {
-//            fis = new BufferedInputStream(new FileInputStream(new File(dir, file)));
             currentFile = file;
-//            input = new ANTLRInputStream(fis);
             
-            b = new BOMInputStream(new FileInputStream(new File(dir, file)));
-//            input = new ANTLRInputStream(b);
-            input = CharStreams.fromStream(b);
+            bomInputStream = new BOMInputStream(new FileInputStream(new File(dir, file)));
+            input = CharStreams.fromStream(bomInputStream);
 
             // create a lexer that feeds off of input CharStream
-            System.out.println("Creating Lexer");
             CSharpLexer lexer = new CSharpLexer(input);
 
             // create a buffer of tokens pulled from the lexer
-            System.out.println("Creating TokenStream");
             CommonTokenStream tokens = new CommonTokenStream(lexer);
 
             // create a parser that feeds off the tokens buffer
-            System.out.println("Creating Parser");
             CSharpParser parser = new CSharpParser(tokens);
             
-            System.out.println("Creating CompilationUnit");
             Compilation_unitContext cuc = parser.compilation_unit();
 
-            System.out.println("Creating ParseTreeWalker");
             ParseTreeWalker ptw = new ParseTreeWalker();
             for (int i = 0; i < cuc.getChildCount(); i++) {
                 ParseTree pt = cuc.getChild(i);
