@@ -1,0 +1,63 @@
+
+
+*** OVERALL PLAN ***
+
+	-> Key differences will likely be between the JplagCsharp6Listener and the JplagJava7Listener
+	-> CSharp6TokenConstant is missing various JavaTokenConstants. Some have no equivalents but some have simply not been implemented. May be causing problems.
+	-> CSharp parser is split between the CSharpParser and the CSharpPreprocessorParser. Preprocessor may not be necessary but may be causing problems
+	          -> There is a CSharpAntlrParser.cs snippet that may be required to use the preprocessor parser correctly.
+
+	-> Parser.parseFile() updated to use non-deprecated functions. May be causing problems
+	-> Grammar requires newer version of Antlr. May be causing problems.
+
+
+*** TODO ***
+
+	--> fix antlr grammar noise...
+
+	--> minimal token specific unit tests
+		// init array
+			--> ARRARY_INIT matches "int[] arr2 = { 0, 1, 2 };" but not "arr1 = new int[] { 9, 8, 7 };" What should it match?
+
+		// do-while, while, for, foreach
+		// switch, case
+		// if-else
+		// try-catch-finally-using
+		// enum
+
+		// constructor, members ==> class
+		// break, continue, ==> if/loops
+		// return, throw, void ==> methods
+
+	--> larger multiple token tests
+		--> VAR_CONST recognizes 'int i' in for loop but not foreach?
+	
+	--> try end not where it should be
+	--> if/else does not end where it should be?
+	--> problems with CLASS_MEMBER_DECLARATIONS. do we even need them?
+
+	--> move on to tokens not yet implemented
+
+
+*** MAYBE ***
+
+	--> AnonymousClass.java?
+
+	--> should we add method calls?
+	--> Should we add increment/decrement?
+
+	--> should we expand CASE to begin/end?
+	--> should we expand NAMESPACE to begin/end?
+
+
+	--> C# attributes are the equivalent of java annotations?
+	--> reference assembly better match to java import?
+
+	--> expand CLASS_DEFINITION grammar?
+	--> expand METHOD_DECLARATION grammar?
+
+
+*** CURRENT STEP ***
+
+	--> unit testing current tokens, verifying their grammar and matching java17 listener
+

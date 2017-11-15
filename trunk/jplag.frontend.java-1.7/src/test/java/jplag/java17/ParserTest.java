@@ -248,6 +248,7 @@ public class ParserTest {
 		}
 		String newTokens = parseWithJ7Parser(javaFile, true);
 		String oldTokens = parseWithJ5Parser(javaFile);
+                System.out.print(newTokens);
 		// compare token sequence?
 		Assert.assertEquals(oldTokens, newTokens);
 	}

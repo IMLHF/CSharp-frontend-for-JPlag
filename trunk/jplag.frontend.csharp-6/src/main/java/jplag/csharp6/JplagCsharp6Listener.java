@@ -1102,7 +1102,7 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterLocal_variable_initializer(CSharpParser.Local_variable_initializerContext ctx) {
-        
+        jplagParser.add(ASSIGNMENT, ctx.getStart());
     }
 
     @Override
@@ -1580,12 +1580,12 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterVariable_initializer(CSharpParser.Variable_initializerContext ctx) {
-        
+        jplagParser.add(ASSIGNMENT, ctx.getStart());
     }
 
     @Override
     public void exitVariable_initializer(CSharpParser.Variable_initializerContext ctx) {
-        
+
     }
 
     @Override
@@ -2449,11 +2449,9 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterIfElseStatement(CSharpParser.IfElseStatementContext ctx) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void exitIfElseStatement(CSharpParser.IfElseStatementContext ctx) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

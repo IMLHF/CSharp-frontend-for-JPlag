@@ -24,6 +24,7 @@ import org.junit.Ignore;
 public class CSharp6ParserTest {
 
     private static File srcTestResources;
+    private boolean debug = true;
 
     public CSharp6ParserTest() {
     }
@@ -62,6 +63,7 @@ public class CSharp6ParserTest {
                 + "VOID      \n"
                 + "METHOD{   \n"
                 + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
                 + "TERNARY   \n"
                 + "}METHOD   \n"
                 + "}CLASS    \n"
@@ -78,7 +80,6 @@ public class CSharp6ParserTest {
     public void testMasterProgram() {
         File file = new File(srcTestResources, "MasterProgram.cs");
         String tokens = parseWithCSharp6Parser(file, true);
-        System.out.println(tokens);
         String expected = ""
                 + "USING     \n"
                 + "USING     \n"
@@ -99,15 +100,13 @@ public class CSharp6ParserTest {
         assertTrue(true);
     }
 
-    @Test
     @Ignore
+    @Test
     public void testTemplate() {
         File file = new File(srcTestResources, "fileName.cs");
         String expected = "";
         String tokens = parseWithCSharp6Parser(file, true);
-        System.out.println(tokens);
-        assertTrue(true);
-//        assertEquals(expected, tokens);
+        assertEquals(expected, tokens);
     }
 
     // real unit tests begin here
@@ -208,6 +207,49 @@ public class CSharp6ParserTest {
         assertEquals(expected, tokens);
     }
 
+    /**
+     * test VARIABLE_AND_CONSTANT_DECLARATOR, ASSIGNMENT, TERNARY_EXPRESSION
+     */
+    @Test
+    public void testVariables() {
+        File file = new File(srcTestResources, "Variables.cs");
+        String expected = ""
+                + "USING     \n"
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "VAR_CONST \n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "VOID      \n"
+                + "METHOD{   \n"
+                + "ASSIGNMENT\n"
+                + "VAR_CONST \n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "ASSIGNMENT\n"
+                + "TERNARY   \n"
+                + "ASSIGNMENT\n"
+                + "ASSIGNMENT\n"
+                + "ASSIGNMENT\n"
+                + "ASSIGNMENT\n"
+                + "}METHOD   \n"
+                + "VOID      \n"
+                + "METHOD{   \n"
+                + "VAR_CONST \n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "ASSIGNMENT\n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "}METHOD   \n"
+                + "}CLASS    \n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
     // <editor-fold defaultstate="collapsed" desc="private helper functions">
     private String parseWithCSharp6Parser(File csharpFile, boolean withDetails) {
         Parser p = new Parser();
@@ -215,6 +257,7 @@ public class CSharp6ParserTest {
         Structure s = p.parse(csharpFile.getParentFile(), new String[]{csharpFile.getName()});
 
         String newTokens = buildTokenString(s, withDetails);
+        if (debug) System.out.print(newTokens);
         return newTokens;
     }
 
