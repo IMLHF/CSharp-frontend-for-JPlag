@@ -1580,7 +1580,11 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterVariable_initializer(CSharpParser.Variable_initializerContext ctx) {
-        jplagParser.add(ASSIGNMENT, ctx.getStart());
+        if (ctx.getParent() instanceof CSharpParser.Array_initializerContext){
+            // don't print assignment as part of array initialization
+        } else {
+            jplagParser.add(ASSIGNMENT, ctx.getStart());
+        }
     }
 
     @Override

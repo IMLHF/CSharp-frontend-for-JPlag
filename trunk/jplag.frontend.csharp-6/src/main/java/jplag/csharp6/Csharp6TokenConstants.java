@@ -16,13 +16,13 @@ public interface Csharp6TokenConstants extends jplag.TokenConstants {
     //?
                                                             // J_SYNC_BEGIN
                                                             // J_SYNC_END
-    final static int DO_WHILE_BEGIN =                   9;  // J_DO_BEGIN
-    final static int DO_WHILE_END =                     10; // J_DO_END
-    final static int WHILE_BEGIN =                      11; // J_WHILE_BEGIN
-    final static int WHILE_END =                        12; // J_WHILE_END
-    final static int FOR_BEGIN =                        13; // J_FOR_BEGIN
-    final static int FOR_END =                          14; // J_FOR_END
-    final static int FOREACH_BEGIN =                    36; // ***added***
+    final static int DO_WHILE_BEGIN =                   9;  // J_DO_BEGIN       // UNIT TESTED  // GRAMMAR VERFIED 
+    final static int DO_WHILE_END =                     10; // J_DO_END         // ""  
+    final static int WHILE_BEGIN =                      11; // J_WHILE_BEGIN    // UNIT TESTED  // GRAMMAR VERFIED 
+    final static int WHILE_END =                        12; // J_WHILE_END      // ""  
+    final static int FOR_BEGIN =                        13; // J_FOR_BEGIN      // UNIT TESTED  // GRAMMAR VERFIED 
+    final static int FOR_END =                          14; // J_FOR_END        // ""  
+    final static int FOREACH_BEGIN =                    36; // ***added***      // UNIT TESTED  // GRAMMAR VERFIED 
     final static int FOREACH_END =                      37; // ***added***
     
     final static int SWITCH_BEGIN =                     15; // J_SWITCH_BEGIN
@@ -52,7 +52,7 @@ public interface Csharp6TokenConstants extends jplag.TokenConstants {
                                                             // J_APPLY
                                                             // J_NEWCLASS
                                                             // J_NEWARRAY
-    final static int ASSIGNMENT =                       39; // J_ASSIGN         // UNIT TESTED  // GRAMMAR VERFIED --> java version special cases arrayInitializer, also C# has separate initializer for fields and local variables
+    final static int ASSIGNMENT =                       39; // J_ASSIGN         // UNIT TESTED  // GRAMMAR VERFIED
     //?
     
     final static int INTERFACE_BEGIN =                  40; // J_INTERFACE_BEGIN

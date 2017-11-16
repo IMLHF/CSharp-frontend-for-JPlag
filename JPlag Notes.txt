@@ -16,10 +16,7 @@
 	--> fix antlr grammar noise...
 
 	--> minimal token specific unit tests
-		// init array
-			--> ARRARY_INIT matches "int[] arr2 = { 0, 1, 2 };" but not "arr1 = new int[] { 9, 8, 7 };" What should it match?
 
-		// do-while, while, for, foreach
 		// switch, case
 		// if-else
 		// try-catch-finally-using
@@ -28,6 +25,9 @@
 		// constructor, members ==> class
 		// break, continue, ==> if/loops
 		// return, throw, void ==> methods
+
+		// init array
+			--> ARRARY_INIT matches "int[] arr2 = { 0, 1, 2 };" but not "arr1 = new int[] { 9, 8, 7 };" What should it match?
 
 	--> larger multiple token tests
 		--> VAR_CONST recognizes 'int i' in for loop but not foreach?

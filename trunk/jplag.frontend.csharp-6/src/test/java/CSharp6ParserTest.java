@@ -250,6 +250,39 @@ public class CSharp6ParserTest {
         assertEquals(expected, tokens);
     }
 
+    @Test
+    public void testLoops() {
+        File file = new File(srcTestResources, "Loops.cs");
+        String expected = ""
+                + "USING     \n"
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "VOID      \n"
+                + "METHOD{   \n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "ARRAY_INI{\n"
+                + "}ARRAY_INI\n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "DO_WHILE{ \n"
+                + "}DO_WHILE \n"
+                + "ASSIGNMENT\n"
+                + "WHILE{    \n"
+                + "}WHILE    \n"
+                + "FOR{      \n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "}FOR      \n"
+                + "FOREACH{  \n"
+                + "}FOREACH  \n"
+                + "}METHOD   \n"
+                + "}CLASS    \n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
     // <editor-fold defaultstate="collapsed" desc="private helper functions">
     private String parseWithCSharp6Parser(File csharpFile, boolean withDetails) {
         Parser p = new Parser();
@@ -257,7 +290,9 @@ public class CSharp6ParserTest {
         Structure s = p.parse(csharpFile.getParentFile(), new String[]{csharpFile.getName()});
 
         String newTokens = buildTokenString(s, withDetails);
-        if (debug) System.out.print(newTokens);
+        if (debug) {
+            System.out.print(newTokens);
+        }
         return newTokens;
     }
 
