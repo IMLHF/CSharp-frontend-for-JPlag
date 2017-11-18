@@ -873,12 +873,12 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterIfStatement(CSharpParser.IfStatementContext ctx) {
-        jplagParser.add(IF_BEGIN, ctx.getStart());
+        // triggering if begin/end on block instead
     }
 
     @Override
     public void exitIfStatement(CSharpParser.IfStatementContext ctx) {
-        jplagParser.add(IF_END, ctx.getStop());
+        // triggering if begin/end on block instead
     }
 
     @Override
@@ -982,12 +982,12 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterTryStatement(CSharpParser.TryStatementContext ctx) {
-        jplagParser.add(TRY_BEGIN, ctx.getStart());
+        // triggering try begin/end on block instead
     }
 
     @Override
     public void exitTryStatement(CSharpParser.TryStatementContext ctx) {
-        jplagParser.add(TRY_END, ctx.getStop());
+        // triggering try begin/end on block instead
     }
 
     @Override
@@ -1092,7 +1092,7 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterLocal_variable_declarator(CSharpParser.Local_variable_declaratorContext ctx) {
-        jplagParser.add(VARIABLE_AND_CONSTANT_DECLARATOR, ctx.getStart());
+        jplagParser.add(VAR_DECLARATOR, ctx.getStart());
     }
 
     @Override
@@ -1146,7 +1146,7 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void exitSwitch_label(CSharpParser.Switch_labelContext ctx) {
-        jplagParser.add(CASE, ctx.getStop());
+        jplagParser.add(CASE, ctx.getStart());
     }
 
     @Override
@@ -1191,22 +1191,22 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterSpecific_catch_clause(CSharpParser.Specific_catch_clauseContext ctx) {
-        jplagParser.add(GENERAL_AND_SPECIFIC_CATCH_BEGIN, ctx.getStart());
+        jplagParser.add(CATCH_BEGIN, ctx.getStart());
     }
 
     @Override
     public void exitSpecific_catch_clause(CSharpParser.Specific_catch_clauseContext ctx) {
-        jplagParser.add(GENERAL_AND_SPECIFIC_CATCH_END, ctx.getStop());
+        jplagParser.add(CATCH_END, ctx.getStop());
     }
 
     @Override
     public void enterGeneral_catch_clause(CSharpParser.General_catch_clauseContext ctx) {
-        jplagParser.add(GENERAL_AND_SPECIFIC_CATCH_BEGIN, ctx.getStart());
+        jplagParser.add(CATCH_BEGIN, ctx.getStart());
     }
 
     @Override
     public void exitGeneral_catch_clause(CSharpParser.General_catch_clauseContext ctx) {
-        jplagParser.add(GENERAL_AND_SPECIFIC_CATCH_END, ctx.getStop());
+        jplagParser.add(CATCH_END, ctx.getStop());
     }
 
     @Override
@@ -1550,7 +1550,7 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterConstant_declarator(CSharpParser.Constant_declaratorContext ctx) {
-        jplagParser.add(VARIABLE_AND_CONSTANT_DECLARATOR, ctx.getStart());
+        jplagParser.add(VAR_DECLARATOR, ctx.getStart());
     }
 
     @Override
@@ -1570,7 +1570,7 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterVariable_declarator(CSharpParser.Variable_declaratorContext ctx) {
-        jplagParser.add(VARIABLE_AND_CONSTANT_DECLARATOR, ctx.getStart());
+        jplagParser.add(VAR_DECLARATOR, ctx.getStart());
     }
 
     @Override
@@ -2452,10 +2452,22 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
     }
 
     @Override
-    public void enterIfElseStatement(CSharpParser.IfElseStatementContext ctx) {
+    public void enterTry_block(CSharpParser.Try_blockContext ctx) {
+        jplagParser.add(TRY_BEGIN, ctx.getStart());
     }
 
     @Override
-    public void exitIfElseStatement(CSharpParser.IfElseStatementContext ctx) {
+    public void exitTry_block(CSharpParser.Try_blockContext ctx) {
+        jplagParser.add(TRY_END, ctx.getStop());
+    }
+
+    @Override
+    public void enterIf_block(CSharpParser.If_blockContext ctx) {
+        jplagParser.add(IF_BEGIN, ctx.getStart());
+    }
+
+    @Override
+    public void exitIf_block(CSharpParser.If_blockContext ctx) {
+        jplagParser.add(IF_END, ctx.getStop());
     }
 }

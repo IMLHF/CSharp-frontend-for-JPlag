@@ -373,8 +373,8 @@ simple_embedded_statement
 	| expression ';'                                              #expressionStatement
 
 	// selection statements
-	| if_wrapper (elseStatement)?                                 #ifElseStatement
-    | SWITCH OPEN_PARENS expression CLOSE_PARENS OPEN_BRACE switch_section* CLOSE_BRACE           #switchStatement
+	| if_block (elseStatement)?                                 #ifStatement
+        | SWITCH OPEN_PARENS expression CLOSE_PARENS OPEN_BRACE switch_section* CLOSE_BRACE           #switchStatement
 
     // iteration statements
 	| WHILE OPEN_PARENS expression CLOSE_PARENS embedded_statement                                        #whileStatement
@@ -389,7 +389,7 @@ simple_embedded_statement
 	| RETURN expression? ';'                                      #returnStatement
 	| THROW expression? ';'                                       #throwStatement
 
-	| TRY block (catch_clauses finally_clause? | finally_clause)  #tryStatement
+	| try_block (catch_clauses finally_clause? | finally_clause)  #tryStatement
 	| CHECKED block                                               #checkedStatement
 	| UNCHECKED block                                             #uncheckedStatement
 	| LOCK OPEN_PARENS expression CLOSE_PARENS embedded_statement                  #lockStatement
@@ -401,8 +401,12 @@ simple_embedded_statement
 	| FIXED OPEN_PARENS pointer_type fixed_pointer_declarators CLOSE_PARENS embedded_statement            #fixedStatement
 	;
 
-if_wrapper
-    : IF OPEN_PARENS expression CLOSE_PARENS if_body                  #ifStatement
+try_block
+    : TRY block
+    ;
+
+if_block
+    : IF OPEN_PARENS expression CLOSE_PARENS if_body
     ;
 
 

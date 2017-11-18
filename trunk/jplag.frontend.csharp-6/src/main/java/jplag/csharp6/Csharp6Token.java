@@ -56,7 +56,7 @@ public class Csharp6Token extends jplag.Token implements Csharp6TokenConstants {
                 return "METHOD{   ";                        //
             case METHOD_DECLARATION_END:                    // J_METHOD_END
                 return "}METHOD   ";                        //
-            case VARIABLE_AND_CONSTANT_DECLARATOR:          // J_VARDEF
+            case VAR_DECLARATOR:          // J_VARDEF
                 return "VAR_CONST ";                        //
                                                             // J_SYNC_BEGIN
                 
@@ -88,9 +88,9 @@ public class Csharp6Token extends jplag.Token implements Csharp6TokenConstants {
                 return "TRY{      ";                        //
             case TRY_END:                                   // ***added***
                 return "}TRY      ";                        //
-            case GENERAL_AND_SPECIFIC_CATCH_BEGIN:          // J_CATCH_BEGIN
+            case CATCH_BEGIN:                               // J_CATCH_BEGIN
                 return "CATCH{    ";                        //
-            case GENERAL_AND_SPECIFIC_CATCH_END:            // J_CATCH_END
+            case CATCH_END:                                 // J_CATCH_END
                 return "}CATCH    ";                        //
             case FINALLY_BEGIN:                             // J_FINALLY
                 return "FINALLY{  ";                        //
@@ -171,7 +171,7 @@ public class Csharp6Token extends jplag.Token implements Csharp6TokenConstants {
                                                             // J_ANNO_C_END
                 
             case USING_STATEMENT:                           // J_TRY_WITH_RESOURCE ???
-                return "USING     ";                        // ??? (TRY_RES)
+                return "USING_RES ";                        // ??? (TRY_RES)
             default:
                 System.err.println("*UNKNOWN: " + type);
                 return "*UNKNOWN" + type;

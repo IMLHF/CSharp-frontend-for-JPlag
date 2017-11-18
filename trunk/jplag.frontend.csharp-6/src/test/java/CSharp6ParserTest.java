@@ -283,6 +283,139 @@ public class CSharp6ParserTest {
         assertEquals(expected, tokens);
     }
 
+    @Test
+    public void testSwitches() {
+        File file = new File(srcTestResources, "Switches.cs");
+        String expected = ""
+                + "USING     \n"
+                + "USING     \n"
+                + "USING     \n"
+                + "USING     \n"
+                + "USING     \n"
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "METHOD{   \n"
+                + "SWITCH{   \n"
+                + "CASE      \n"
+                + "CASE      \n"
+                + "CASE      \n"
+                + "RETURN    \n"
+                + "CASE      \n"
+                + "CASE      \n"
+                + "RETURN    \n"
+                + "CASE      \n"
+                + "CASE      \n"
+                + "RETURN    \n"
+                + "CASE      \n"
+                + "RETURN    \n"
+                + "}SWITCH   \n"
+                + "}METHOD   \n"
+                + "}CLASS    \n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
+    @Test
+    public void testTryCatchFinally() {
+        File file = new File(srcTestResources, "TryCatchFinally.cs");
+        String expected = ""
+                + "USING     \n"
+                + "USING     \n"
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "VOID      \n"
+                + "METHOD{   \n"
+                + "TRY{      \n"
+                + "}TRY      \n"
+                + "CATCH{    \n"
+                + "THROW     \n"
+                + "}CATCH    \n"
+                + "CATCH{    \n"
+                + "}CATCH    \n"
+                + "FINALLY{  \n"
+                + "}FINALLY  \n"
+                + "USING_RES \n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "TRY{      \n"
+                + "}TRY      \n"
+                + "FINALLY{  \n"
+                + "}FINALLY  \n"
+                + "}METHOD   \n"
+                + "}CLASS    \n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
+    @Test
+    public void testIfElse() {
+        File file = new File(srcTestResources, "IfElse.cs");
+        String expected = ""
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "METHOD{   \n"
+                + "IF{       \n"
+                + "IF{       \n"
+                + "}IF       \n"
+                + "ELSE{     \n"
+                + "IF{       \n"
+                + "}IF       \n"
+                + "ELSE{     \n"
+                + "IF{       \n"
+                + "}IF       \n"
+                + "}ELSE     \n"
+                + "}ELSE     \n"
+                + "}IF       \n"
+                + "ELSE{     \n"
+                + "IF{       \n"
+                + "}IF       \n"
+                + "IF{       \n"
+                + "}IF       \n"
+                + "}ELSE     \n"
+                + "RETURN    \n"
+                + "}METHOD   \n"
+                + "}CLASS    \n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
+    @Test
+    public void testJumpStatements() {
+        File file = new File(srcTestResources, "JumpStatements.cs");
+        String expected = ""
+                + "USING     \n"
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "METHOD{   \n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "FOR{      \n"
+                + "VAR_CONST \n"
+                + "ASSIGNMENT\n"
+                + "IF{       \n"
+                + "THROW     \n"
+                + "}IF       \n"
+                + "IF{       \n"
+                + "BREAK     \n"
+                + "}IF       \n"
+                + "IF{       \n"
+                + "CONTINUE  \n"
+                + "}IF       \n"
+                + "ASSIGNMENT\n"
+                + "}FOR      \n"
+                + "RETURN    \n"
+                + "}METHOD   \n"
+                + "}CLASS    \n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
     // <editor-fold defaultstate="collapsed" desc="private helper functions">
     private String parseWithCSharp6Parser(File csharpFile, boolean withDetails) {
         Parser p = new Parser();
