@@ -14,18 +14,17 @@
 *** TODO ***
 
 	--> fix antlr grammar noise...
-	--> multiple token unit tests
 	--> move on to tokens not yet implemented (don't forget unit tests!)
 		--> C# attributes == java annotations?
+	--> multiple token unit tests
 
 
 *** MAYBE ***
 
 	--> should we...
 		--> add method calls?
-		--> add ++/-- to ASSIGN?
-		--> add goto?
-		--> add structs?
+		--> add ++/-- to ASSIGN? ==> minimal gain
+		--> add goto? structs? ==> not for ISU
 	
 	--> reference assembly better match to java import?
 
@@ -40,7 +39,4 @@
 
 *** CURRENT STEP ***
 
-	--> simple and master (finish or remove)
-	--> what is AnonymousClass.java testing?
-	--> is the Token.getLength() method working correctly?
-	--> "should we's" new features or just not yet implemented?
+	--> ???

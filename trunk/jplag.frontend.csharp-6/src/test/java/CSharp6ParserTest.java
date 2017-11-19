@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.io.File;
 import jplag.StrippedProgram;
@@ -17,14 +12,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 
-/**
- *
- * @author Nick
- */
 public class CSharp6ParserTest {
 
     private static File srcTestResources;
-    private boolean debug = true;
+    private final boolean debug = true;
 
     public CSharp6ParserTest() {
     }
@@ -48,58 +39,6 @@ public class CSharp6ParserTest {
     }
 
     // </editor-fold>
-    // simple and master are for debugging purposes only (should probably include program.cs...
-    @Test
-    public void testSimpleProgram() {
-        File file = new File(srcTestResources, "SimpleProgram.cs");
-        String expected = ""
-                + "USING     \n"
-                + "USING     \n"
-                + "USING     \n"
-                + "USING     \n"
-                + "USING     \n"
-                + "NAMESPACE \n"
-                + "CLASS{    \n"
-                + "VOID      \n"
-                + "METHOD{   \n"
-                + "VAR_CONST \n"
-                + "ASSIGNMENT\n"
-                + "TERNARY   \n"
-                + "}METHOD   \n"
-                + "}CLASS    \n"
-                + "********\n";
-        String tokens = parseWithCSharp6Parser(file, false);
-        assertEquals(expected, tokens);
-    }
-
-    /**
-     * work in progress
-     */
-    @Test
-    @Ignore
-    public void testMasterProgram() {
-        File file = new File(srcTestResources, "MasterProgram.cs");
-        String tokens = parseWithCSharp6Parser(file, true);
-        String expected = ""
-                + "USING     \n"
-                + "USING     \n"
-                + "USING     \n"
-                + "USING     \n"
-                + "USING     \n"
-                + "NAMESPACE \n"
-                + "CLASS{    \n"
-                + "MEMBERS{  \n"
-                + "METHOD{   \n"
-                + "VAR_CONST \n"
-                + "TERNARY   \n"
-                + "METHOD{   \n"
-                + "}MEMBERS  \n"
-                + "}CLASS    \n"
-                + "********\n";
-        assertEquals(expected, tokens);
-        assertTrue(true);
-    }
-
     @Ignore
     @Test
     public void testTemplate() {
@@ -211,9 +150,6 @@ public class CSharp6ParserTest {
         assertEquals(expected, tokens);
     }
 
-    /**
-     * test VARIABLE_AND_CONSTANT_DECLARATOR, ASSIGNMENT, TERNARY_EXPRESSION
-     */
     @Test
     public void testVariables() {
         File file = new File(srcTestResources, "Variables.cs");
@@ -479,9 +415,9 @@ public class CSharp6ParserTest {
         for (int i = 0; i < oldStruct.size(); i++) {
             sb.append(Csharp6Token.type2string(oldStruct.tokens[i].type));
             if (withDetails) {
-                sb.append(" L:" + oldStruct.tokens[i].getLine()
-                        + " C:" + oldStruct.tokens[i].getColumn()
-                        + " l:" + oldStruct.tokens[i].getLength());
+                sb.append(" L:").append(oldStruct.tokens[i].getLine());
+                sb.append(" C:").append(oldStruct.tokens[i].getColumn());
+                sb.append(" l:").append(oldStruct.tokens[i].getLength());
             }
             sb.append("\n");
         }
