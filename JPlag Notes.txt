@@ -14,43 +14,33 @@
 *** TODO ***
 
 	--> fix antlr grammar noise...
-
-	--> minimal token specific unit tests
-
-		// enum
-
-		// constructor, members ==> class
-
-		// init array
-			--> ARRARY_INIT matches "int[] arr2 = { 0, 1, 2 };" but not "arr1 = new int[] { 9, 8, 7 };" What should it match?
-
-	--> larger multiple token tests
-
-	--> problems with CLASS_MEMBER_DECLARATIONS. do we even need them?
-
-	--> move on to tokens not yet implemented
+	--> multiple token unit tests
+	--> move on to tokens not yet implemented (don't forget unit tests!)
+		--> C# attributes == java annotations?
 
 
 *** MAYBE ***
 
-	--> AnonymousClass.java?
-
-	--> should we add method calls?
-	--> Should we add increment/decrement?
-
-	--> should we expand CASE to begin/end?
-	--> goto...
-
-	--> start vs stop, getLength()
-
-	--> C# attributes are the equivalent of java annotations?
+	--> should we...
+		--> add method calls?
+		--> add ++/-- to ASSIGN?
+		--> add goto?
+		--> add structs?
+	
 	--> reference assembly better match to java import?
 
-	--> expand CLASS_DEFINITION grammar?
-	--> expand METHOD_DECLARATION grammar?
+
+*** EVENTUALLY ***
+
+	--> VOID and ARRAY_INIT may not be matching as well as expected, but it's probably ok for now
+		--> need to correct method_declaration grammar
+		--> need to correct class_definition grammar
+		--> need to correct array_initializer grammar
 
 
 *** CURRENT STEP ***
 
-	--> unit testing current tokens, verifying their grammar and matching java17 listener
-
+	--> simple and master (finish or remove)
+	--> what is AnonymousClass.java testing?
+	--> is the Token.getLength() method working correctly?
+	--> "should we's" new features or just not yet implemented?

@@ -1,4 +1,8 @@
-class SimpleClass {
+public class SimpleClass {
+    public SimpleClass() {
+
+    }
+
     private class InnerClass {
 
     }
@@ -8,10 +12,12 @@ class SimpleClass {
     }
 }
 
-class InhertingClass : SimpleClass {
+public class InhertingClass : SimpleClass {
     private class Foo {
         private class Bar {
+            public Bar() {
 
+            }
         }
     }
 }

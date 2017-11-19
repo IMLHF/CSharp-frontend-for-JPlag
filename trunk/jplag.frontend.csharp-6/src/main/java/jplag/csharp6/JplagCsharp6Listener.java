@@ -918,7 +918,7 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void exitForStatement(CSharpParser.ForStatementContext ctx) {
-        jplagParser.add(FOR_END, ctx.getStart());
+        jplagParser.add(FOR_END, ctx.getStop());
     }
 
     @Override
@@ -1934,7 +1934,7 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void enterEnum_body(CSharpParser.Enum_bodyContext ctx) {
-        jplagParser.add(ENUM_BODY, ctx.getStart());
+        
     }
 
     @Override
@@ -2248,7 +2248,7 @@ public class JplagCsharp6Listener implements CSharpParserListener, Csharp6TokenC
 
     @Override
     public void exitEnum_definition(CSharpParser.Enum_definitionContext ctx) {
-        jplagParser.add(ENUM_DEFINITION_END, ctx.getStart());
+        jplagParser.add(ENUM_DEFINITION_END, ctx.getStop());
     }
 
     @Override

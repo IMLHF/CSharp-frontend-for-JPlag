@@ -10,7 +10,7 @@ public interface Csharp6TokenConstants extends jplag.TokenConstants {
     
     final static int CLASS_DEFINITION_BEGIN =           4;  // J_CLASS_BEGIN    // UNIT TESTED  // GRAMMAR VERIFIED --> this only matches a subset of class-declaration defined here https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes#class-declarations
     final static int CLASS_DEFINITION_END =             5;  // J_CLASS_END      // ""           // ""
-    final static int METHOD_DECLARATION_BEGIN =         6;  // J_METHOD_BEGIN   // UNIT TESTED  // GRAMMAR VERIFIED --> this only matches a subset of class-declaration defined here https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes#methods
+    final static int METHOD_DECLARATION_BEGIN =         6;  // J_METHOD_BEGIN   // UNIT TESTED  // GRAMMAR VERIFIED --> this only matches a subset of method-declaration defined here https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes#methods
     final static int METHOD_DECLARATION_END =           7;  // J_METHOD_END     // ""           // ""
     final static int VAR_DECLARATOR = 8;                    // J_VARDEF         // UNIT TESTED  // GRAMMAR VERFIED 
                                                             // J_SYNC_BEGIN
@@ -54,23 +54,23 @@ public interface Csharp6TokenConstants extends jplag.TokenConstants {
     
     final static int ASSIGNMENT =                       39; // J_ASSIGN         // UNIT TESTED  // GRAMMAR VERFIED
     
-    final static int INTERFACE_BEGIN =                  40; // J_INTERFACE_BEGIN
-    final static int INTERFACE_END =                    41; // J_INTERFACE_END
+    final static int INTERFACE_BEGIN =                  40; // J_INTERFACE_BEGIN// UNIT TESTED  // GRAMMAR VERFIED - subset of official itnerface_declaration
+    final static int INTERFACE_END =                    41; // J_INTERFACE_END  // ""           // ""
    
-    final static int CONSTRUCTOR_DECLARATION_BEGIN =    42; // J_CONSTR_BEGIN
-    final static int CONSTRUCTOR_DECLARATION_END =      43; // J_CONSTR_END
-    final static int CLASS_MEMBER_DECLARATIONS_BEGIN =  44; // J_INIT_BEGIN
-    final static int CLASS_MEMBER_DECLARATIONS_END =    45; // J_INIT_END
+    final static int CONSTRUCTOR_DECLARATION_BEGIN =    42; // J_CONSTR_BEGIN   // UNIT TESTED  // GRAMMAR VERFIED - does not include constructor type parameters
+    final static int CONSTRUCTOR_DECLARATION_END =      43; // J_CONSTR_END     // ""           // ""
     
+    // grammar needs to be fixed
     final static int VOID =                             38; // J_VOID
     
+    // grammar needs to be fixed
     final static int ARRAY_INITIALIZER_BEGIN =          47; // J_ARRAY_INIT_BEGIN
     final static int ARRAY_INITIALIZER_END =            48; // J_ARRAY_INIT_END
     
-    final static int ENUM_DEFINITION_BEGIN =            33; // J_ENUM_BEGIN
-    final static int ENUM_DEFINITION_END =              34; // J_ENUM_END
-    final static int ENUM_BODY =                        35; // J_ENUM_CLASS_BEGIN ???
+    final static int ENUM_DEFINITION_BEGIN =            33; // J_ENUM_BEGIN     // UNIT TESTED  // GRAMMAR VERFIED - definition is a subset of declaration
+    final static int ENUM_DEFINITION_END =              34; // J_ENUM_END       // ""           // ""
     
+                                                            // J_ENUM_CLASS_BEGIN   // no c# equivalent
                                                             // J_GENERIC
                                                             // J_ASSERT
                                                             // J_ANNO
@@ -83,14 +83,6 @@ public interface Csharp6TokenConstants extends jplag.TokenConstants {
                                                             // J_ANNO_C_END
 
     final static int USING_STATEMENT =                  46; // J_TRY_WITH_RESOURCE  // UNIT TESTED  // GRAMMAR VERFIED
-    
-// NOTES...
-//    final static int OBJECT_CREATION_EXPRESSION_BEGIN = 33;     // J_IN_CLASS_BEGIN/END? Are these right?
-//    final static int OBJECT_CREATION_EXPRESSION_END = 34;       // J_IN_CLASS_BEGIN/END? Are these right?
-//    final static int OBJECT_OR_COLLECTION_INITIALIZER = 37;     // J_NEWCLASS? probably wrong...
-//    final static int ARRAY_INITIALIZER = 38;                    // J_NEWARRAY? probably wrong...
-//    final static int J_APPLY = 36; // J_APPLY
-//    struct
     
     final static int NUM_DIFF_TOKENS = 49;
 }

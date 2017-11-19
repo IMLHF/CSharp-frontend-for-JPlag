@@ -56,12 +56,10 @@ public class Csharp6Token extends jplag.Token implements Csharp6TokenConstants {
                 return "METHOD{   ";                        //
             case METHOD_DECLARATION_END:                    // J_METHOD_END
                 return "}METHOD   ";                        //
-            case VAR_DECLARATOR:          // J_VARDEF
+            case VAR_DECLARATOR:                            // J_VARDEF
                 return "VAR_CONST ";                        //
-                                                            // J_SYNC_BEGIN
-                
-                                                            // J_SYNC_END
-                
+            // J_SYNC_BEGIN
+            // J_SYNC_END
             case DO_WHILE_BEGIN:                            // J_DO_BEGIN
                 return "DO_WHILE{ ";                        //
             case DO_WHILE_END:                              // J_DO_END
@@ -114,17 +112,12 @@ public class Csharp6Token extends jplag.Token implements Csharp6TokenConstants {
                 return "RETURN    ";                        //
             case THROW:                                     // J_THROW
                 return "THROW     ";                        //
-                                                            // J_IN_CLASS_BEGIN
-                
-                                                            // J_IN_CLASS_END
-                
-                                                            // J_APPLY
-                
-                                                            // J_NEWCLASS
-                
-                                                            // J_NEWARRAY   
-                
-            case ASSIGNMENT:                                // J_ASSIGN ???
+            // J_IN_CLASS_BEGIN
+            // J_IN_CLASS_END
+            // J_APPLY
+            // J_NEWCLASS
+            // J_NEWARRAY   
+            case ASSIGNMENT:                                // J_ASSIGN
                 return "ASSIGNMENT";
             case INTERFACE_BEGIN:                           // J_INTERFACE_BEGIN
                 return "INTERFACE{";                        //
@@ -148,30 +141,20 @@ public class Csharp6Token extends jplag.Token implements Csharp6TokenConstants {
                 return "ENUM{     ";                        //
             case ENUM_DEFINITION_END:                       // J_ENUM_END
                 return "}ENUM     ";                        //
-            case ENUM_BODY:                                 // J_ENUM_CLASS_BEGIN ???
-                return "ENUM_BODY ";                        //
-                                                            // J_GENERIC
-                
-                                                            // J_ASSERT
-                
-                                                            // J_ANNO
-                
-                                                            // J_ANNO_MARKER
-                
-                                                            // J_ANNO_M_BEGIN
-                
-                                                            // J_ANNO_M_END
-                
-                                                            // J_ANNO_T_BEGIN
-                
-                                                            // J_ANNO_T_END
-                
-                                                            // J_ANNO_C_BEGIN
-                
-                                                            // J_ANNO_C_END
-                
-            case USING_STATEMENT:                           // J_TRY_WITH_RESOURCE ???
-                return "USING_RES ";                        // ??? (TRY_RES)
+            // J_ENUM_CLASS_BEGIN - no c# equivalent
+            // J_GENERIC
+            // J_ASSERT
+            // J_ANNO
+            // J_ANNO_MARKER
+            // J_ANNO_M_BEGIN
+            // J_ANNO_M_END
+            // J_ANNO_T_BEGIN
+            // J_ANNO_T_END
+            // J_ANNO_C_BEGIN
+            // J_ANNO_C_END
+            case USING_STATEMENT:                           // J_TRY_WITH_RESOURCE
+                return "USING_RES ";                        //
+            
             default:
                 System.err.println("*UNKNOWN: " + type);
                 return "*UNKNOWN" + type;

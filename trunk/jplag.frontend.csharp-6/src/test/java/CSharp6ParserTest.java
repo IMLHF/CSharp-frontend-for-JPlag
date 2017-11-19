@@ -169,6 +169,8 @@ public class CSharp6ParserTest {
         File file = new File(srcTestResources, "Class.cs");
         String expected = ""
                 + "CLASS{    \n"
+                + "CONSTRUCT{\n"
+                + "}CONSTRUCT\n"
                 + "CLASS{    \n"
                 + "}CLASS    \n"
                 + "CLASS{    \n"
@@ -177,6 +179,8 @@ public class CSharp6ParserTest {
                 + "CLASS{    \n"
                 + "CLASS{    \n"
                 + "CLASS{    \n"
+                + "CONSTRUCT{\n"
+                + "}CONSTRUCT\n"
                 + "}CLASS    \n"
                 + "}CLASS    \n"
                 + "}CLASS    \n"
@@ -410,6 +414,47 @@ public class CSharp6ParserTest {
                 + "}FOR      \n"
                 + "RETURN    \n"
                 + "}METHOD   \n"
+                + "}CLASS    \n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
+    @Test
+    public void testInterface() {
+        File file = new File(srcTestResources, "Interface.cs");
+        String expected = ""
+                + "NAMESPACE \n"
+                + "INTERFACE{\n"
+                + "}INTERFACE\n"
+                + "INTERFACE{\n"
+                + "}INTERFACE\n"
+                + "INTERFACE{\n"
+                + "}INTERFACE\n"
+                + "********\n";
+        String tokens = parseWithCSharp6Parser(file, false);
+        assertEquals(expected, tokens);
+    }
+
+    @Ignore // grammar needs to be corrected before this works
+    @Test
+    public void testArrays() {
+        File file = new File(srcTestResources, "Arrays.cs");
+        String expected = "";
+        String tokens = parseWithCSharp6Parser(file, true);
+        assertEquals(expected, tokens);
+    }
+
+    @Test
+    public void testEnums() {
+        File file = new File(srcTestResources, "Enums.cs");
+        String expected = ""
+                + "NAMESPACE \n"
+                + "CLASS{    \n"
+                + "ENUM{     \n"
+                + "}ENUM     \n"
+                + "ENUM{     \n"
+                + "}ENUM     \n"
                 + "}CLASS    \n"
                 + "********\n";
         String tokens = parseWithCSharp6Parser(file, false);
