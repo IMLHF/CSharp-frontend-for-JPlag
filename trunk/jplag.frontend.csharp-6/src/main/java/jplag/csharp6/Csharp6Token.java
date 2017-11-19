@@ -127,10 +127,8 @@ public class Csharp6Token extends jplag.Token implements Csharp6TokenConstants {
                 return "CONSTRUCT{";                        //
             case CONSTRUCTOR_DECLARATION_END:               // J_CONSTR_END
                 return "}CONSTRUCT";                        //
-            case CLASS_MEMBER_DECLARATIONS_BEGIN:           // J_INIT_BEGIN ???
-                return "MEMBERS{  ";                        //
-            case CLASS_MEMBER_DECLARATIONS_END:             // J_INIT_END ???
-                return "}MEMBERS  ";                        //
+            // J_INIT_BEGIN
+            // J_INIT_END
             case VOID:                                      // J_VOID
                 return "VOID      ";                        //
             case ARRAY_INITIALIZER_BEGIN:                   // J_ARRAY_INIT_BEGIN
