@@ -21,6 +21,7 @@
 		--> add goto? structs? ==> not for ISU
 	
 	--> reference assembly better match to java import?
+	--> nest all using statements into one token?
 
 
 *** EVENTUALLY ***
@@ -33,4 +34,4 @@
 
 *** CURRENT STEP ***
 
-	--> ???
+	--> move on to tokens not yet implemented
