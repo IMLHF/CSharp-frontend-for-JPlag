@@ -4,16 +4,10 @@
 
 	-> Key differences will likely be between the JplagCsharp6Listener and the JplagJava7Listener
 	-> CSharp6TokenConstant is missing various JavaTokenConstants. Some have no equivalents but some have simply not been implemented. May be causing problems.
-	-> CSharp parser is split between the CSharpParser and the CSharpPreprocessorParser. Preprocessor may not be necessary but may be causing problems
-	          -> There is a CSharpAntlrParser.cs snippet that may be required to use the preprocessor parser correctly.
-
-	-> Parser.parseFile() updated to use non-deprecated functions. May be causing problems
-	-> Grammar requires newer version of Antlr. May be causing problems.
 
 
 *** TODO ***
 
-	--> fix antlr grammar noise...
 	--> move on to tokens not yet implemented (don't forget unit tests!)
 		--> C# attributes == java annotations?
 	--> multiple token unit tests

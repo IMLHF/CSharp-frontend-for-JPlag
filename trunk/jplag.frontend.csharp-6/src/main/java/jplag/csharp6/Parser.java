@@ -1,19 +1,22 @@
 package jplag.csharp6;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import jplag.Structure;
 import jplag.csharp6.grammar.CSharpLexer;
 import jplag.csharp6.grammar.CSharpParser;
 import jplag.csharp6.grammar.CSharpParser.Compilation_unitContext;
-import org.antlr.v4.runtime.ANTLRInputStream;
+import jplag.csharp6.grammar.CSharpPreprocessorParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Lexer;
+import org.antlr.v4.runtime.ListTokenSource;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -86,24 +89,73 @@ public class Parser extends jplag.Parser implements Csharp6TokenConstants {
         CharStream input;
         try {
             currentFile = file;
-            
+
             bomInputStream = new BOMInputStream(new FileInputStream(new File(dir, file)));
             input = CharStreams.fromStream(bomInputStream);
 
+            List<Token> codeTokens = new ArrayList<Token>();
+            List<Token> commentTokens = new ArrayList<Token>();
+
             // create a lexer that feeds off of input CharStream
-            CSharpLexer lexer = new CSharpLexer(input);
+            CSharpLexer preprocessorLexer = new CSharpLexer(input);
+            List<? extends Token> tokens = preprocessorLexer.getAllTokens();
+
+            ArrayList<Token> directiveTokens = new ArrayList<Token>();
+            ListTokenSource directiveTokenSource = new ListTokenSource(directiveTokens);
 
             // create a buffer of tokens pulled from the lexer
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            CommonTokenStream directiveTokenStream = new CommonTokenStream(directiveTokenSource, CSharpLexer.DIRECTIVE);
 
             // create a parser that feeds off the tokens buffer
-            CSharpParser parser = new CSharpParser(tokens);
-            
-            Compilation_unitContext cuc = parser.compilation_unit();
+            CSharpPreprocessorParser preprocessorParser = new CSharpPreprocessorParser(directiveTokenStream);
+
+            int index = 0;
+            boolean compiliedTokens = true;
+            while (index < tokens.size()) {
+                Token token = tokens.get(index);
+                if (token.getType() == CSharpLexer.SHARP) {
+                    directiveTokens.clear();
+                    int directiveTokenIndex = index + 1;
+                    // Collect all preprocessor directive tokens.
+                    while (directiveTokenIndex < tokens.size()
+                            && tokens.get(directiveTokenIndex).getType() != CSharpLexer.EOF
+                            && tokens.get(directiveTokenIndex).getType() != CSharpLexer.DIRECTIVE_NEW_LINE
+                            && tokens.get(directiveTokenIndex).getType() != CSharpLexer.SHARP) {
+                        if (tokens.get(directiveTokenIndex).getChannel() == CSharpLexer.COMMENTS_CHANNEL) {
+                            commentTokens.add(tokens.get(directiveTokenIndex));
+                        } else if (tokens.get(directiveTokenIndex).getChannel() != Lexer.HIDDEN) {
+                            directiveTokens.add(tokens.get(directiveTokenIndex));
+                        }
+                        directiveTokenIndex++;
+                    }
+
+                    directiveTokenSource = new ListTokenSource(directiveTokens);
+                    directiveTokenStream = new CommonTokenStream(directiveTokenSource, CSharpLexer.DIRECTIVE);
+                    preprocessorParser.setInputStream(directiveTokenStream);
+                    preprocessorParser.reset();
+                    // Parse condition in preprocessor directive (based on CSharpPreprocessorParser.g4 grammar).
+                    CSharpPreprocessorParser.Preprocessor_directiveContext directive = preprocessorParser.preprocessor_directive();
+                    // if true than next code is valid and not ignored.
+                    compiliedTokens = directive.value;
+                    index = directiveTokenIndex - 1;
+                } else if (token.getChannel() == CSharpLexer.COMMENTS_CHANNEL) {
+                    commentTokens.add(token); // Colect comment tokens (if required).
+                } else if (token.getChannel() != Lexer.HIDDEN && token.getType() != CSharpLexer.DIRECTIVE_NEW_LINE && compiliedTokens) {
+                    codeTokens.add(token); // Collect code tokens.
+                }
+                index++;
+            }
+
+            // At second stage tokens parsed in usual way.
+            ListTokenSource codeTokenSource = new ListTokenSource(codeTokens);
+            CommonTokenStream codeTokenStream = new CommonTokenStream(codeTokenSource);
+            CSharpParser parser = new CSharpParser(codeTokenStream);
+            // Parse syntax tree (CSharpParser.g4)
+            Compilation_unitContext compilationUnit = parser.compilation_unit();
 
             ParseTreeWalker ptw = new ParseTreeWalker();
-            for (int i = 0; i < cuc.getChildCount(); i++) {
-                ParseTree pt = cuc.getChild(i);
+            for (int i = 0; i < compilationUnit.getChildCount(); i++) {
+                ParseTree pt = compilationUnit.getChild(i);
                 ptw.walk(new JplagCsharp6Listener(this), pt);
             }
 

@@ -11,8 +11,8 @@ options { tokenVocab=CSharpLexer; }
 import java.util.HashSet;}
 
 @parser::members
-{Stack<Boolean> conditions = new Stack<Boolean>() {{ conditions.push(true); }};
-public HashSet<String> ConditionalSymbols = new HashSet<String>() {{ ConditionalSymbols.add("DEBUG"); }};
+{Stack<Boolean> conditions = new Stack<Boolean>(); {{ conditions.push(true); }};
+public HashSet<String> ConditionalSymbols = new HashSet<String>(); {{ ConditionalSymbols.add("DEBUG"); }};
 
 private boolean allConditions() {
 	for(boolean condition: conditions) {
